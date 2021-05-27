@@ -1,0 +1,52 @@
+
+
+<!-- 
+<script>
+
+  //  ------------------------------------
+  //  inherited properties (do not change) 
+  //  ------------------------------------
+
+  export let value;
+  export let name;
+  export let id;
+  export let url;
+
+  export let type = ROW;
+
+  export let width = 'auto';
+  export let height = 'auto';
+  export let spacer = '10px';
+  export let rotate = 0;
+
+  export let style = '';
+  export let className = '';
+
+  //  ------------------------------------
+  //  element properties 
+  //  ------------------------------------
+
+  export let children = [];
+  export let justify = 'stretch';
+  export let breakpoint = 'none';
+
+
+  import Group from '../Group.svelte'
+  import { ROW, COL, PROPS } from '../../Defines.js'
+
+</script>
+
+<template>
+  <Group 
+    a={{value,
+    name, 
+    id, 
+    url, 
+    type,
+    width,
+    height,
+    spacer,
+    rotate}} {style} {className} >
+    <slot />
+  </Group>
+</template> -->

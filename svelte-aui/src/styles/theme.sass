@@ -1,0 +1,66 @@
+@import 'colors.sass'
+
+/* element focus style */
+
+=light-border
+  border: 1px solid rgba(255,255,255,0.3)
+=light-bg
+  background: rgba(255,255,255,0.3)
+=light-text
+  color: rgba(255,255,255,0.4)
+  
+=handle
+  $s: 0.75rem  
+  +width-height( $s, $s )
+  border-radius: $s
+
+.aui
+  *, button, input, textarea
+    color: white
+  &:focus, select:focus + .aui-index-inner, button:focus, .aui-text input:focus 
+    border-color: white
+  input[type=text], .aui-index-inner, button, aui-text input
+    +light-border
+  input[type=text]
+    background: rgba(0,0,0,0.1)
+  button
+    border-radius: 3px
+
+  .aui-vec2
+    &.aui-axis
+      .aui-vec2-inner
+        flex-grow: 1
+        position: relative
+    &.aui-range
+      .aui-vec2-inner
+        flex-grow: 0
+        position: relative
+        min-height: 1rem
+        .aui-bar
+          height: 0.2rem
+          flex-grow: 1
+          +light-bg
+          padding: 0px
+        .aui-point:before
+          +handle
+
+  .aui-axis
+    .aui-point:before
+      +handle
+    .aui-cross-area
+      > *
+        display: none
+      .hz, .vt
+        display: block
+        stroke-dasharray: none
+        stroke-width: 1px
+
+  .aui-bar-fill, .aui-point:before
+    background-color: $cyan-a100 
+  .aui-axis .aui-cross-area
+    .hz, .vt
+      stroke: $cyan-a100 
+  .aui-label .aui-label-value
+    color: $cyan-a100
+  .aui-label .aui-label-name
+    +light-text

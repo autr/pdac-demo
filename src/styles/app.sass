@@ -1,0 +1,246 @@
+@import "./_colors"
+@import 'svelte-aui/src/styles/utilities.sass'
+
+@import '../../sassis/src/_index'
+
+$width: 100%
+$height: 100vh
+$topbar: 30px
+$fontsize: 18px 
+$smallfontsize: 14px
+
+ 
+@keyframes spin-fwd
+	from 
+		transform: rotate(0deg)
+	to 
+		transform: rotate(360deg) 
+@keyframes spin-rev
+	from 
+		transform: rotate(0deg)
+	to 
+		transform: rotate(-360deg) 
+
+
+// hostname: background colors...
+
+#pdac, #pdac .overlay, #pdac .header
+	background-color: map-get($colors, "blue-grey-900")
+
+#pdac
+	*, *::placeholder, *::-webkit-input-placeholder
+		color: white
+
+@each $name, $color in $colors
+	#pdac.bg-#{$name}
+		background-color: $color
+		.overlay, .header
+			background-color: $color
+		.timer.pulse *, .timer.pulse .txt
+			color: $color
+
+
+// PDAC main...
+
+html, *
+	font-family: sans-serif
+	+fontsize( $fontsize)
+
+#pdac
+	+shorthand
+	margin: 0 auto
+	width: $width
+	height: $height
+	overflow: auto
+	position: relative
+	box-sizing: border-box
+	padding-top: $topbar
+	input[type=text]
+		background: transparent
+	.keyboard-wrapper
+		.aui-text
+			margin-bottom: 0px
+	.keyboard
+		.row
+			button
+				border-right-width: 0px
+				border-bottom-width: 0px
+				&:last-child
+					border-right-width: 1px
+			&:last-child
+				button
+					border-bottom-width: 1px
+
+	.aui-label
+		display: none!important
+
+	select
+		padding: 0.5em 0em!important
+
+	input[type=text], input[type=password], input[type=email], .aui-index-inner
+		border: 1px solid white
+	.overlay .spinner span, input[type=text], input[type=password], input[type=email], .aui-index-inner, .aui-button button
+		border-color: white
+
+	// hostname: text colors...
+
+	// .pdac-main-column
+	// 	max-width: 100vw
+	// .pdac-main-column > *
+	// 	flex-grow: 1
+	// 	flex-basis: 50px
+	// 	display: flex
+	// 	flex-direction: column
+	// 	justify-content: center
+	// 	a
+	// 		display: flex
+	// 		flex-grow: 1
+	// 		flex-basis: 30px
+	// 		padding: 5px 0px
+	// 		justify-content: left
+	.pdac-main-column a
+			&:focus, &:active
+				background: rgba(255,255,255,0.2)
+	@each $name, $color in $colors
+		&.txt-#{$name}
+			.timer
+				&.spin
+					border-color: $color
+				&.pulse
+					.ring
+						background: $color
+			*, *::placeholder, *::-webkit-input-placeholder
+				color: $color
+			.overlay .spinner span, input[type=text], input[type=password], input[type=email], .aui-index-inner, .aui-button button, .keyboard button
+				border-color: $color
+			.pdac-main-column a
+					&:focus, &:active
+						background: transparentize($color, 	0.8)
+
+
+	select
+		option
+			background-color: map-get($colors, "blue-grey-900")
+	::-webkit-scrollbar
+		display: none
+	#back
+		flex-direction: row
+		justify-content: left 
+		align-items: center
+		flex-grow: 0
+		flex-basis: 50px
+		min-height: 50px
+		display: flex
+		svg
+			display: inline 
+	.overlay
+		justify-content: center
+		.aui-group
+			align-items: center
+		.aui-flex-button
+			width: 100%
+		.spinner
+			$s: 40px
+			margin: 20px
+			position: relative
+			width: $s * 2
+			height: $s * 2 
+			max-height: $s * 2 
+			display: block
+			transform-origin: 50% 50%
+			animation: spin-rev 6s infinite linear
+			span
+				border: 2px solid white
+				display: block
+				position: absolute
+				width: $s
+				height: $s
+				transform-origin: 0 0 
+				animation: spin-fwd 4s infinite linear
+				left: 0
+				top: 0
+				box-sizing: border-box
+				transform-origin: 50% 50%
+				&:nth-child(1)
+					left: $s/2
+					animation-duration: 4.1s
+				&:nth-child(2)
+					top: $s/2
+					animation-duration: 4.2s
+				&:nth-child(3)
+					top: $s/2
+					left: $s 
+					animation-duration: 3.9s
+				&:nth-child(4)
+					top: $s 
+					left: $s/2 
+					animation-duration: 4.3s
+	.hostname
+		padding: 20px
+		border-radius: 100%
+
+	a
+		text-decoration: none
+	.overlay
+		position: fixed
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		display: flex
+		z-index: 99
+		box-sizing: border-box
+		padding: 40px 	
+		.aui-column > *
+			display: flex
+			flex-grow: 1
+	&.hide-cursor
+		cursor: none!important
+		*, a 
+			cursor: none!important
+	.container
+		display: flex
+		height: 100%
+	.aui-button
+		button
+			border: 1px solid white
+			border-radius: 5px
+			a
+				justify-content: center
+				align-items: center
+				display: flex
+				flex-grow: 1
+	.grid
+		display: grid!important
+		justify-content: stretch
+		grid-template-columns: repeat(2, minmax(10px, 1fr))
+		.aui-flex
+			padding: 0!important
+	.header
+		position: absolute
+		width: $width
+		height: $topbar
+		top: 0
+		left: 0
+		display: flex 
+		justify-content: space-between
+		z-index: 101
+		font-size: $smallfontsize
+		box-sizing: border-box
+		line-height: $topbar
+		padding: #{ ( $topbar - $smallfontsize ) / 2} 10px
+		// font-family: pixel, monospace, sans-serif
+		// font-smooth: never!important
+		// -webkit-font-smoothing : none!important
+		label
+			display: flex
+			align-items: center
+
+	*
+		user-select: none
+
+
+#pdac .konsole, #pdac .terminal
+	+terminal-theme
+	font-family: monospace
+	overflow: scroll

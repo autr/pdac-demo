@@ -1,0 +1,127 @@
+
+/* helpers */
+
+
+@import 'mixins'
+
+.aui-hidden
+	+rel
+	opacity: 0
+	z-index: 0
+.aui-rotate
+	+abs
+	+width-height
+	transform-origin: 50% 50%
+	overflow: hidden
+.aui-rotate-el
+	+flex-column
+	transform-origin: 0% 0%
+	white-space: nowrap
+
+.aui-points
+	+area 
+	+abs
+	+top-left
+	+width-height
+	.aui-point
+		width: 100%
+		height: 100%
+		position: absolute
+		top: 0
+		left: 0
+		&:before
+			content: ""
+			width: 20px
+			height: 20px
+			display: block
+			position: absolute
+			top: 0
+			left: 0
+			background: black
+			transform: translate(-50%, -50%)
+			border-radius: 20px
+
+
+.aui-actual-button
+	+area 
+	+reset-webkit
+	background: transparent
+	border: none
+	display: flex
+	padding: 0
+	align-items: center
+	justify-content: center
+	+flex-column
+	.aui-actual-button-inner
+		+flex-fill
+		background: transparent
+
+
+.aui-bar, .aui-bar-wrap
+	+fill
+	.aui-bar-fill
+		transform-origin: 0% 0%
+		height: 100%
+		+fill
+
+
+.aui-helper-conic
+	$conicWidth: 100%
+	+rel
+	width: $conicWidth
+	height: $conicWidth 
+	box-sizing: border-box 
+	.inner
+		border: 4px solid white
+		background: white
+		+abs
+		+top-left(50%, 50%)
+		transform: translate( -50%, -50%)
+		box-sizing: border-box
+	.ring
+		clip-path: url(#circleClip)
+		+fill
+		span
+			+fill
+			clip-path: circle(#{$conicWidth/2} at center)
+	:global([ref=points])
+		+top-left
+
+
+.aui-cross-area
+	+abs
+	+width-height
+	*
+		vector-effect: non-scaling-stroke
+	line
+		stroke-width: 1px
+		stroke: lightgrey
+		stroke-dasharray: 10 5
+	polygon
+		fill: transparent
+
+
+.aui-cross-area
+	> div
+		+abs
+		+width-height
+		+top-left
+		box-sizing: border-box
+		border-color: black
+		border-style: solid 
+		border-width: 0px
+		&.top, &.bottom
+			border-left-width: 1px
+		&.left, &.right
+			border-top-width: 1px
+
+
+.aui-grid
+	display: grid
+
+.aui-debug
+	position: fixed
+	+top-left
+	padding: 10px
+	color: white
+	background: #111

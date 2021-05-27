@@ -1,0 +1,118 @@
+/*
+
++-------------------+
+|         ▲         |
+|    ◀ padding ▶    |
+|         ▼         |
++-------------------+
+
+*/
+
+$element-padding: 5px 5px 5px 5px;
+$row-padding: 0px 0px 0px 0px;
+$column-padding: 0px 0px 0px 0px;
+
+$lyp: 0px, 0px, 0px, 0px; // layout-padding
+$elp: 5px, 5px, 5px, 5px; // element-padding
+
+
+$outer-padding: ( // name, min-height
+	"default": $elp,
+	"row": $lyp,
+	"column": $lyp,
+	"button": $elp,
+	"toggle": $elp, 
+	"slider": $elp,
+	"knob": $elp,
+	"text": $elp,
+	"range": $elp,
+	"axis": $elp,
+	"joystick": $elp,
+	"colour": $elp,
+	"vector": $elp,
+	"shape": $elp,
+	"dropdown": $elp
+);
+
+$inl: 0px;
+$inb: 3px;
+$intxt: 10px;
+
+$internal-sizing: ( // name, min-height
+	"row": $inl,
+	"column": $inl,
+	"button": $inb,
+	"toggle": $inb, 
+	"slider": $inb,
+	"knob": $inb,
+	"text": $intxt,
+	"range": $inl,
+	"axis": $inl,
+	"joystick": $inl,
+	"colour": $inl,
+	"vector": $inl,
+	"shape": $inl,
+	"dropdown": $intxt
+);
+
+
+/*
+
+o-------------------o
+          ↑
+      min-height    
+          ↓
+o-------------------o
+
+*/
+
+$smh: 40px; // temp value: small-min-height
+$lmh: 120px; // temp value: large-min-height
+
+$min-heights: ( // name, min-height
+	"button": $smh,
+	"toggle": $smh,
+	"slider": $smh,
+	"knob": $lmh,
+	"text": $smh,
+	"range": $smh,
+	"axis": $lmh,
+	"joystick": $lmh,
+	"colour": $smh,
+	"vector": $lmh,
+	"shape": $lmh,
+	"dropdown": $smh
+);
+
+/*
+
+/-------------------\
+|                   |
+|  rounded-corners  |
+|                   |
+\-------------------/
+
+*/
+
+
+$nrc: 0; // temp value: no-rounded-corners
+$src: 0.1; // temp value: small-rounded-corners
+$frc: 1; // temp value: large-rounded-corners
+
+$rounded-corners: (
+	"default": $nrc,
+	"button": $frc,
+	"toggle": $frc,
+	"slider": $frc,
+	"knob": $frc,
+	"text": $src,
+	"range": $src,
+	"axis": $src,
+	"joystick": $src,
+	"colour": $src,
+	"vector": $src,
+	"shape": $src,
+	"matrix": $src,
+	"dropdown": $src
+
+);

@@ -1,0 +1,149 @@
+@import 'basis'
+
+		
+// $scrollbar: 20px
+// $scrollBG: rgba(0,0,0,0.5)
+// $scrollThumb: white
+// &::-webkit-scrollbar  
+// 	-webkit-appearance: none
+// 	background: $scrollBG
+// 	border-radius: 0px
+// &::-webkit-scrollbar:horizontal
+// 	height: $scrollbar
+// &::-webkit-scrollbar:vertical 
+// 	height: $scrollbar
+// &::-webkit-scrollbar-thumb 
+// 	border-radius: 8px
+// 	border-radius: $scrollbar
+// 	border: $scrollbar*0.15 solid $scrollBG
+// 	background-color: $scrollThumb
+
+
+=reset-webkit
+	&:hover, &:active, &:focus
+		outline: none
+	-webkit-appearance: none
+	-webkit-tap-highlight-color: rgba(255,255,255,0)
+	touch-action: manipulation
+
+=area( $name: "default" )
+	+flex
+	position: relative
+	box-sizing: border-box
+	border-radius: map-get($rounded-corners, $name)
+	width: 100%
+
+=calc-padding( $name : "default" )
+	$p: map-get($outer-padding, $name)
+	@if length($p) < 3
+		@error "outer-padding array is empty: #{$name} #{$p}"
+	// height: calc( 100% - #{nth($p,1)+nth($p,3)})
+	// width: calc( 100% - #{nth($p,2)+nth($p,4)})
+	padding-top: nth($p, 1)
+	padding-right: nth($p, 2)
+	padding-bottom: nth($p, 3)
+	padding-left: nth($p, 4)
+
+
+=element
+	box-sizing: border-box
+	position: relative
+	+flex
+
+=flex
+	display: flex
+	flex-grow: 1
+	flex-shrink: 0 
+	flex-basis: auto
+	+border-box
+=flex-content
+	flex-grow: 1
+	flex-shrink: 0
+	flex-basis: 0
+	+border-box
+=flex-column
+	+flex
+	align-items: stretch
+	flex-direction: column
+	+border-box
+=flex-row
+	+flex
+	align-items: stretch
+	flex-direction: row
+	+border-box
+
+=flex-fill
+	+flex
+	justify-content: center
+	flex-direction: column
+	+border-box
+=grow
+	flex-grow: 1
+=abs
+	position: absolute
+=rel
+	position: relative
+=fix
+	position: fixed
+=table
+	display: table
+=block
+	display: block
+=fill
+	+abs
+	+width-height
+	+top-left
+
+=translate( $x: -50%, $y: -50% )
+	transform: translate( $x, $y )
+
+=top-left( $x: 0px, $y: 0px)
+	top: $x
+	left: $y
+=top-right( $x: 0px, $y: 0px)
+	top: $x
+	right: $y
+=bottom-left( $x: 0px, $y: 0px)
+	bottom: $x
+	left: $y
+=bottom-right( $x: 0px, $y: 0px)
+	bottom: $x
+	right: $y
+
+=width-height( $w: 100%, $h: 100% )
+	width: $w
+	height: $h
+=border-box
+	box-sizing: border-box
+
+=reset
+	html
+		*
+			-webkit-appearance: none
+		body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+			margin: 0
+			padding: 0
+			border: 0
+			font-size: 100%
+			font: inherit
+			vertical-align: baseline
+		article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+			display: block
+
+		body
+			line-height: 1
+
+		ol, ul 
+			list-style: none
+
+		blockquote, q
+			quotes: none
+
+		blockquote:before, blockquote:after, q:before, q:after
+			content: ''
+			content: none
+
+		table
+			border-collapse: collapse
+			border-spacing: 0
+

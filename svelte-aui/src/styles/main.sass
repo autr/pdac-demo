@@ -1,0 +1,220 @@
+
+@import 'mixins'
+// @import 'basis'
+@import 'helpers'
+
+
+$spacing: 0.5rem
+$minheight: 80px
+
+/* labels */
+
+
+.aui-root
+	// max-height: 100vh
+
+.aui-el, .aui-group
+	flex-basis: auto
+
+	&.aui-grow
+		flex-grow: 1
+	&.aui-no-grow
+		flex-grow: 0
+	&.aui-label-none
+		> .aui-label
+			display: none
+	&.aui-label-above
+		flex-direction: column
+		> .aui-label
+			display: flex
+			margin-bottom: 0.5rem
+	&.aui-label-side
+		flex-direction: row
+		align-items: center
+		> .aui-label
+			display: flex
+			margin: 0
+			margin-right: 0.5rem
+			&+*
+				flex-grow: 1
+				min-height: 100%
+				min-width: auto
+
+ 
+
+.aui-el, .aui-group, .aui-el *, .aui-group *
+	outline: none
+
+			
+.aui-el, .aui-el *
+	-webkit-user-select: none!important
+
+.aui-group
+	display: flex
+	flex-shrink: 0 
+	flex-grow: 1
+	align-items: stretch
+	justify-content: stretch
+	box-sizing: border-box
+	max-width: 100%
+	overflow-x: auto
+	overflow-y: auto
+	&.aui-row
+		flex-direction: row
+		> *
+			flex-basis: 0
+		> .aui-use-height
+			flex-basis: 0!important
+			flex-grow: 1!important
+		> .aui-column
+			flex-grow: 1
+	&.aui-column
+		flex-direction: column
+
+
+.aui-el
+	$basis: 2rem
+	flex-shrink: 0 
+	position: relative
+	display: flex
+	+border-box
+	.aui-points
+		overflow: hidden
+
+.aui-el
+	// min-height: $minheight
+	&.aui-axis
+		// min-height: $minheight * 2
+
+.aui-group.aui-row
+	@for $i from 16 through 160
+		&.aui-breakpoint-#{$i*20}px
+			@media only screen and (max-width: #{$i*20}px)
+				+flex-column
+
+$groups: "default" "column" "row" "matrix"
+
+.aui-group.aui-column
+	> *
+		margin-bottom: $spacing
+		&:last-child
+			margin-bottom: 0rem
+.aui-group.aui-row
+	> *
+		margin-right: $spacing
+		&:last-child
+			margin-right: 0rem
+
+
+
+/* elements */
+
+
+.aui-boolean
+	[ref=button]
+		+border-box
+		padding: map-get($internal-sizing, "button")
+	&.active, &:active
+		.aui-actual-button > .aui-actual-button-inner 
+			background: rgba(255,255,255,0.5)
+
+
+.aui-index
+	$sizing: map-get($internal-sizing, "dropdown")
+	flex-grow: 0
+	select
+		border: none
+		+reset-webkit
+		height: auto
+		background: transparent!important
+		color: transparent!important
+		+abs
+		+fill
+	.aui-index-inner
+		padding: $sizing*0.75 $sizing
+		flex-grow: 1
+
+.aui-matrix
+	[ref=RotateRef], [ref=RotateRef] .aui-flex
+		display: table
+		padding: 0
+	.aui-matrix-area
+		+area
+	.aui-matrix-items
+		display: grid
+		position: var(--position)
+		+width-height
+		grid-template-columns: repeat(var(--columns), minmax(10px, auto))
+		.aui-flex
+			padding: 0!important
+		.aui-spacer
+			display: none!important
+
+			
+.aui-text
+	$sizing: map-get($internal-sizing, "text")
+	flex-grow: 0
+	input, textarea
+		background: transparent
+		border: none
+		+reset-webkit
+		border: none
+		padding: $sizing*0.75 $sizing
+		min-width: 100%
+		flex-grow: 1
+		
+.aui-number
+	.aui-number-inner
+		flex-grow: 1
+		position: relative
+
+.aui-color
+	$conicWidth: 120px
+	$conicInfo: 40px
+	.swatch
+		width: 100%
+	.color
+		+element
+		.aui-color-dropdown
+			+abs
+			+top-left(100%, 0px)
+			+flex-row
+			background: white
+			box-sizing: border-box
+			z-index: 11
+			opacity: 0
+			transition: opacity 0.4s ease
+			display: none
+			.conic-wrapper
+				+width-height($conicWidth, $conicWidth)
+			.info
+				+grow 
+				min-width: $conicInfo
+		&.active
+			.aui-color-dropdown
+				display: block
+				opacity: 1
+
+	.square
+		$squareRt: 70.71%
+		$triganom: 13.4%
+		position: relative
+		transform-origin: 50% 50%
+		background: white
+		left: (100-$squareRt)/2
+		top: (100-$squareRt)/2
+		+width-height( $squareRt, $squareRt)
+		background: white
+		.black
+			/*mix-blend-mode: multiply*/
+		.white
+			/*mix-blend-mode: lighten*/
+			/*z-index: 20*/
+		.color
+			/*mix-blend-mode: screen*/
+		> div
+			+fill
+
+
+@import 'theme'
+@import 'utilities'
