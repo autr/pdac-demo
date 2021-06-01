@@ -1,0 +1,1 @@
+Deprecated version, use `npm i sassis` or see [@autr/sassis](https://github.com/autr/sassis)

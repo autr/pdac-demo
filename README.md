@@ -1,14 +1,14 @@
-## PDAC frontend
+## PDAC Frontend
 
 **Introduction**
 
 This is the development repository of a hybrid SSR (server-side) and frontend HTML webapp that acts as the visible user interface of the PDAC, displayed on the 3.2" touchscreen.
 
-Once built, the exported and minified webapp is located inside [pdac app folder](https://github.com/RegieKI/pdac/tree/stable/app)<sup>1</sup> and launched at startup into Chromium browser with flags such as [kiosk mode](https://github.com/RegieKI/pdac/blob/stable/system/launchBrowser.sh).
+Once built, the exported and minified webapp is copied to [pdac app folder](https://github.com/RegieKI/pdac/tree/stable/app)<sup>1</sup> and launched at startup into Chromium browser with flags such as [kiosk mode](https://github.com/RegieKI/pdac/blob/stable/system/launchBrowser.sh).
 
 **Threads**
 
-After launching the webapp creates thread running the Python backend<sup>2</sup> API as well as it's own</sup> API for triggering utility scripts in [pdac system folder](https://github.com/RegieKI/pdac/tree/stable/system)<sup>3</sup> like [rclone to cloud](https://github.com/RegieKI/pdac/blob/stable/system/rcloneSync.sh). 
+After launching the webapp creates a thread running the Python backend<sup>2</sup> API as well as it's own</sup> API for triggering utility scripts in [pdac system folder](https://github.com/RegieKI/pdac/tree/stable/system)<sup>3</sup> like [rclone to cloud](https://github.com/RegieKI/pdac/blob/stable/system/rcloneSync.sh). 
 
 **Terminology**
 
@@ -19,7 +19,7 @@ After launching the webapp creates thread running the Python backend<sup>2</sup>
 
 **Modes**
 
-Sessions and exercises can have two modes: `RECORD` and `STAGE`
+Sessions and exercises have two modes: `RECORD` and `STAGE`
 
 * in `RECORD` the timing and start / stop events are used to trigger recordings
 * in `STAGE` mode the timing and start / stop events are sent externally to websockets port `8765` 
@@ -29,7 +29,7 @@ Modes and the location of the API must always be set as an environment variable 
 
 **Training**
 
-In either mode Sessions and Exercises can be dynamically updated via a remote instance of [Directus]() - the backend interface allows the director to create, edit and update training exercises. A copy of the last version of the database used is available as JSON in [directus static backup](#)<sup>5</sup>.
+In either mode Sessions and Exercises can be dynamically updated via a remote instance of [Directus](https://v8.docs.directus.io/getting-started/introduction.html) - the backend interface allows the director to create, edit and update training exercises. Perfomers are anonymised with a colour (also used as background colour of the GUI) and assigned a miband mac address. A copy of the last version of the database used is available as JSON in [directus static backup](https://github.com/RegieKI/pdac-frontend/tree/stable/database)<sup>5</sup>.
 
 For demonstations and open source, the default setting is to use static copy of the Director API rather than a live API<sup>6</sup>.
 
@@ -79,3 +79,7 @@ pnpm run build
 ```
 
 *NB*: pdac-frontend should be located side-by-side in it's directory [see formatting notes](https://github.com/RegieKI/pdac)
+
+#### License
+
+[MIT](https://github.com/RegieKI/regieki-docs/blob/main/LICENSE-MIT.md)
