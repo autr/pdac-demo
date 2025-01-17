@@ -9,6 +9,7 @@
     "rebuild": "sapper build --legacy && node __sapper__/build",
     "export": "sapper export --legacy && [ -d ./docs ] && rm -rf ./docs; mv ./__sapper__/export ./docs",
     "start": "node __sapper__/build",
+    "serve": "http-server ./docs -c-1 --proxy http://pdac/docs",
     "forever": "forever start -c node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
