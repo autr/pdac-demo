@@ -12,6 +12,17 @@
 		axios.post('/camera/stop?as=json', {});
 		console.log('.....', error, status, message ,response);
 	};
+
+	import { stores } from '@sapper/app'
+	const { page } = stores();
+
+
+	$: backHref = ( () => {
+		const idx = $page.path.lastIndexOf('/')
+		if ( idx == -1 ) return '/'
+		return path.substring( 0, idx )
+	});
+
 </script>
 
 
@@ -19,15 +30,21 @@
 	<title>{status}</title>
 </svelte:head>
 
-<Back history={true} />
-<div class="m06">
-	<h2>Error ({status})</h2>
+<Back href={backHref} />
+<div class="bt2-solid p06 pb0">
+	<h2>Error {status}</h2>
 	{error.message}
 </div>
 <Row a={{grow: true}} className="p06">
-	<Button a={{grow: true}} style="width:100%;"><a href="/">Home</a></Button>
-	<Button a={{grow: true}} style="width:100%;" on:click={ () => window.location = window.location } >Refresh</Button>
+	<Button a={{grow: true}} style="width:100%;min-height:3em;">
+		<a href="/">Home</a>
+	</Button>
+	<Button a={{grow: true}} style="width:100%;min-height:3em;" on:click={ () => window.location = window.location } >
+		<div class="centered">
+			Refresh
+		</div>
+	</Button>
 </Row>
-{#if dev && error.stack}
+<!-- {#if dev && error.stack}
 	<pre>{error.stack}</pre>
-{/if}
+{/if} -->

@@ -75,6 +75,9 @@ export const API = ( Endpoints, Routes ) => {
 	return ( req, res, next ) => {
 
 
+		// return SendSuccess( res, {} );
+
+
 		let inp = req.path;
 
 		const isJson = req.query.as === 'json';

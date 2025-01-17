@@ -1,7 +1,3 @@
-<script context="module">
-  import { AutoPreload } from 'svelte-touch-os/src/index.js'
-  export async function preload( page, session ) {  return AutoPreload(page, session, this) }
-</script>
 
 <script>
   import axios from 'axios'
@@ -14,21 +10,38 @@
   let dropdown = {options: data, key: 'hostname'};
   let hostname;
 
-  $: hostname = data.hostname;
+  $: hostname = $info.colorName;
 
   function onChanged(e) {
     hostname = dropdown.options[dropdown.value].hostname;
   }
   function saveHostname( e ) {
-    overlay.set( { type: 'wait', message: 'Setting hostname to ' + e.detail } )
-    axios.post( `/system/hostname?as=json`, { hostname: e.detail }).then( (res)=> {
-    }).catch (err => {
-      overlay.set( {type: 'error', ...err.response.data} )
-    });
+    overlay.set( { type: 'wait', message: 'Setting Hostname to ' + e.detail } )
+
+    triggerFinish = 1
+  }
+
+  let triggerFinish = 0
+  $: onFinish( triggerFinish )
+
+  function onFinish( triggerFinish ) {
+    if (triggerFinish == 0 ) return
+
+    setTimeout( () => {
+      overlay.set( {
+        type: 'success', 
+        message: 'Hostname Successfully Set',
+        actions: [
+          ['System', '/system'],
+          ['Home', '/'],
+        ]
+      })
+      triggerFinish = 0
+    }, 1000)
   }
 
 </script>
-<Back />
-<Column className="mlr06 keyboard-wrapper" a={{grow: true}}>
-  <Keyboard placeholder="Enter a hostname" text={hostname} on:submit={saveHostname} />
+<Back href="/system" />
+<Column className="mlr06 keyboard-wrapper mb06" a={{grow: true}}>
+  <Keyboard placeholder="Enter Hostname" text={hostname} on:submit={saveHostname} />
 </Column>

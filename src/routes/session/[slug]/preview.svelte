@@ -1,64 +1,76 @@
-<script context="module">
-  import { AutoPreload }  from 'svelte-touch-os/src/index.js'
-  export async function preload( page, session ) { return AutoPreload(page, session, this) }
-</script>
 <script>
 
-  import axios from 'axios'
-  import { onMount } from 'svelte'
-  import { goto } from '@sapper/app';
+	import { onMount } from 'svelte'
+	import { goto } from '@sapper/app';
 
+	import sessions from '../sessions.json'
 
-  // icons...
+	// icons...
 
-  import ArrowLeft from "svelte-material-icons/ArrowLeft.svelte";
-  import Check from "svelte-material-icons/Check.svelte";
-  import Microphone from "svelte-material-icons/Microphone.svelte";
-  import Camera from "svelte-material-icons/Camera.svelte";
+	import ArrowLeft from "svelte-material-icons/ArrowLeft.svelte";
+	import Check from "svelte-material-icons/Check.svelte";
+	import Microphone from "svelte-material-icons/Microphone.svelte";
+	import Camera from "svelte-material-icons/Camera.svelte";
 
-  // stores...
+	// stores...
 
-  import { info, overlay } from './../../stores.js'
-  import { stores } from '@sapper/app';
-  const { page } = stores();
+	import { info, overlay } from './../../stores.js'
+	import { stores } from '@sapper/app';
+	const { page } = stores();
 
-  // helpers...
+	// helpers...
 
-  import { Back, WebCam, AudioLevels }  from 'svelte-touch-os/src/index.js'
-  import { Any, Button, Column, Row, Block } from 'svelte-aui/src/index.js'
+	import { Back, AudioLevels }  from 'svelte-touch-os/src/index.js'
+	import WebCam from './WebCam.svelte'
+	import { Any, Button, Column, Row, Block } from 'svelte-aui/src/index.js'
 
-  const style = "";//"position:absolute;width:calc( 50% - 20px );bottom:10px;";
+	const style = "";//"position:absolute;width:calc( 50% - 20px );bottom:10px;";
 
-  export let data;
+	let data = sessions.data
 
-  $: session = data[0];
-  $: isSound = session.point_of_interest == 'sound';
+	$: session = data.find( item => {
+		return $page.params.slug == item.url
+	})
+
+	$: isSound = session.point_of_interest == 'sound';
+
+	$: currentMode = overrideMode || session.point_of_interest
+
+	let size = 420
+
+	let overrideMode = null
+
+	function toggleMode() {
+		if (currentMode == 'body') overrideMode = 'face'
+		if (currentMode == 'face') overrideMode = 'body'
+	}
 
 </script>
 
 <!-- check levels and camera... -->
 
-<Row className="p06">
+<Back href="/session/{session.url}"/>
+<Column a={{grow:true}} className="p06 bt2-solid">
 
-  <Button a={{grow: true}}>
-    <a href={'/session/'+session.url}>
-      <ArrowLeft />
-    </a>
-  </Button>
+	<div 
+		on:click={toggleMode}
+		class="flex-grow flex column align-center relative" 
+		style="position: relative;width:100%;">
 
-  <Block  a={{grow: false, width: '360px'}} className="align-center" style="height:240px;">
-    {#if isSound} 
-      <AudioLevels style="height: 100%" />
-      <Microphone size="2em" />
-    {:else}
-      <WebCam width="360px" height="240px" focus={session.point_of_interest} /> 
-    {/if}
-  </Block>
+			<Column  a={{grow: true}} className="align-center" style="max-width: 42px;position:absolute;height:100%;width: 2em;left:0.4em;bottom:0.4em;z-index:999" >
+				<AudioLevels style="height: 100%" />
+				<Microphone size="2em" />
+			</Column>
+			<WebCam 
+				style="width:100%;max-height:65vh;overflow:hidden"
+				focus={currentMode} /> 
 
-  <Button a={{grow: true}}>
-    <a href={'/session/'+session.url+'/1'}>
-      <Check />
-    </a>
-  </Button>
+	</div>
 
-</Row>
+	<Button a={{grow: true}} style="border-width:2px;">
+		<a href={'/session/'+session.url+'/1'}>
+			<Check size="1.6em" />
+		</a>
+	</Button>
+
+</Column>

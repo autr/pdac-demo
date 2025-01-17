@@ -47,23 +47,32 @@
 	}
 
 	function onClick( e ) {
-		if (a.type == BTN) {
+		if (a.isToggle) {
+			Set('value', !a.value);
+		} else if (a.type == BTN) {
 			Set( 'value', true );
 			setTimeout( e => Set( 'value', false, a ),50);
-
-
-		} else if (a.type == TOG) {
-			Set('value', !a.value);
 		}
+		// } else if (a.type == TOG) {
+		// }
+		if (a.onClick) a.onClick( a.value )
 		dispatch('click', e.detail);
 	}
+
+	let lastValue = a.value 
+	$: ((b) => {
+		if (lastValue != a.value && a.onChange) {
+			a.onChange(a.value)
+			lastValue = a.value
+		}
+	})( a.value )
 </script>
 
 <template>
 	<div 
 		class={classes}
 		style={styles} 
-		class:active={a.value} 
+		class:active={a.value ? 1 : 0} 
 		class:vertical={a.vertical} 
 		>
 		<Label {a} />

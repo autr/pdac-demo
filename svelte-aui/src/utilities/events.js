@@ -10,7 +10,6 @@ export const Event = (key, a) => {
 export const Helper = function () {
 	this.dispatcher = createEventDispatcher();
 	this.set = ( key, value, a ) => {
-   console.log('dispatchhh')
 		a[key] = value;
 		this.dispatcher( 'updated', Event(key, a));
 		return a;

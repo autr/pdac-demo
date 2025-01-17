@@ -1,31 +1,45 @@
-<script context="module">
-  import { AutoPreload } from 'svelte-touch-os/src/index.js'
-  export async function preload( page, session ) { return AutoPreload(page, session, this) }
-</script>
 <script>
 
-  import axios from 'axios'
-  import { onMount } from 'svelte'
-  import { goto } from '@sapper/app';
-  // icons...
+	import { onMount } from 'svelte'
+	import { goto } from '@sapper/app';
 
-  // stores...
+	import sessions from '../sessions.json'
+	// icons...
 
-  import { info, overlay } from './../../stores.js'
-  import { stores } from '@sapper/app';
-  const { page } = stores();
+	// stores...
 
-  import { Any, Button, Column, Row } from 'svelte-aui/src/index.js'
+	import { info, overlay } from './../../stores.js'
+	import { stores } from '@sapper/app';
+	const { page } = stores();
 
-  export let data;
-  $: session = data[0] || {};
+	import ArrowLeft from "svelte-material-icons/ArrowLeft.svelte";
+	import Sync from "svelte-material-icons/Sync.svelte";
+
+	import { Any, Button, Column, Row } from 'svelte-aui/src/index.js'
+
+	let data = sessions.data
+
+	$: session = data.find( item => {
+		return $page.params.slug == item.url
+	})
 
 </script>
 
 <Column a={{grow: true}} className="justify-center align-center" >
-  <div class="mtb1">Complete: {session.title}</div>
-  <Row a={{height: '60px'}}>
-    <Button a={{grow: true}} style="min-width: 160px" ><a href="/session">Sessions</a></Button>
-    <Button a={{grow: true}} style="min-width: 160px" ><a href="/sync">Sync</a></Button>
-  </Row>
+	<div class="" style="font-size: 1.2em">Complete</div>
+	<div class="mb1">{session.title}</div>
+	<Row a={{height: '60px'}}>
+		<Button a={{grow: true}} style="min-width: 160px;border-width:2px;" >
+			<a href="/session">
+				<ArrowLeft size="1.4em" />
+				<div class="ml04">Sessions</div>
+			</a>
+		</Button>
+		<Button a={{grow: true}} style="min-width: 160px;border-width:2px;" >
+			<a href="/sync">
+				<Sync size="1.4em" />
+				<div class="ml04">Sync</div>
+			</a>
+		</Button>
+	</Row>
 </Column>

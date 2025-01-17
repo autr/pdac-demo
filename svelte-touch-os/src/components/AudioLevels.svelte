@@ -109,7 +109,7 @@
         left: 0
         display: block
         width: 100%
-        background: white
+        background: var(--fg)
 
 </style>
 

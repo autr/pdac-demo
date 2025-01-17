@@ -43,39 +43,39 @@ const isDev = (process.env.NODE_ENV == 'development')
 let browser, backend;
 
 
-axios.get('http://localhost:8888').then( res => {
-	console.log('[server.js] 🥚  backend is running! not starting.')
-}).catch( err => {
+// axios.get('http://localhost:8888').then( res => {
+// 	console.log('[server.js] 🥚  backend is running! not starting.')
+// }).catch( err => {
 	
-	console.log('[server.js] 🥚  spawning runBackend.sh ....');
+// 	console.log('[server.js] 🥚  spawning runBackend.sh ....');
 
-	try {
-		backend = spawn('sh', [config.pdac_utils + '/runBackend.sh']);
-		console.log('[server.js] 🥚 ✅  runBackend.sh opened with PID', backend.pid );
+// 	try {
+// 		backend = spawn('sh', [config.pdac_utils + '/runBackend.sh']);
+// 		console.log('[server.js] 🥚 ✅  runBackend.sh opened with PID', backend.pid );
 
-		backend.stdout.pipe(process.stdout)
+// 		backend.stdout.pipe(process.stdout)
 
-		backend.on('error', function(err) {
-			console.log('[server.js] 🥚 ❌  could not start backend', err.message );
-		})
+// 		backend.on('error', function(err) {
+// 			console.log('[server.js] 🥚 ❌  could not start backend', err.message );
+// 		})
 
-		backend.on('exit', function() {
-			console.log('[server.js] ⚰️ 🛑  backend has exited...');
-			// backend = spawn('sh', [config.pdac_utils + '/runBackend.sh']);
-		})
-	} catch( err ) {
-		console.log('[server.js] 🥚 ❌  could not start backend', err.message );
-	}
-	console.log('[server.js] 🌐 🕰  launching browser in 10 seconds... please wait.' );
-	setTimeout( function() { 
-		browser = spawn('sh', [config.pdac_utils + '/launchBrowser.sh']);
-		browser.on('error', function(err) {
-			console.log('[server.js] 🌐 ❌  could not start web browser', err.message );
-		})
-		console.log('[server.js] 🌐  spawning launchBrowser.sh >>>>>', browser.pid );
-	}, 10)
+// 		backend.on('exit', function() {
+// 			console.log('[server.js] ⚰️ 🛑  backend has exited...');
+// 			// backend = spawn('sh', [config.pdac_utils + '/runBackend.sh']);
+// 		})
+// 	} catch( err ) {
+// 		console.log('[server.js] 🥚 ❌  could not start backend', err.message );
+// 	}
+// 	console.log('[server.js] 🌐 🕰  launching browser in 10 seconds... please wait.' );
+// 	setTimeout( function() { 
+// 		browser = spawn('sh', [config.pdac_utils + '/launchBrowser.sh']);
+// 		browser.on('error', function(err) {
+// 			console.log('[server.js] 🌐 ❌  could not start web browser', err.message );
+// 		})
+// 		console.log('[server.js] 🌐  spawning launchBrowser.sh >>>>>', browser.pid );
+// 	}, 10)
 
-})
+// })
 
 const processData = async data => {
 	return data
@@ -515,84 +515,84 @@ AutoSetup(
 		}
 	}, 
 	{ 
-		'/system/dhcp': {
-			GET: 'GetDhcpcd',
-			POST: 'SetDhcpcd'
-		},
-		'/usb': {
-			GET: `files:${config.pdac_usb}`
-		},
-		'/info': { 
-			GET: 'Info'
-		},
-		'/network': {
-			GET: 'NetworkUSB'
-		},
-		'/network/list': {
-			GET: 'NetworkList'
-		},
-		'/network/connect': {
-			POST: 'ConnectToNetwork'
-		},
-		'/session': {
-			GET: 'SessionsList'
-		},
-		'/session/:session': {
-			GET: 'SessionByID'
-		},
-		'/session/:session/preview': {
-			GET: 'SessionByID'
-		},
-		'/session/:session/complete': {
-			GET: 'SessionByID'
-		},
-		'/session/:session/:idx': {
-			GET: 'SessionByID'
-		},
-		'/camera/start': {
-			POST: 'CameraStart'
-		},
-		'/camera/stop': {
-			POST: 'CameraStop'
-		},
-		'/system/reboot': {
-			POST: 'SystemReboot'
-		},
-		'/system/shutdown': {
-			POST: 'SystemShutdown'
-		},
-		'/system/update': {
-			POST: 'UpdateSystem'
-		},
-		'/system/calibrate': {
-			POST: 'CalibrateScreen'
-		},
-		'/system/hostname': {
-			GET: 'GetHostname',
-			POST: 'SetHostname'
-		},
-		'/system/miband/reconnect': {
-			POST: 'MibandConnect'
-		},
-		'/system/miband': {
-			POST: 'SetMibandAddress'
-		},
-		'/debug': {
-			POST: 'Debug'
-		},
-		'/buzz': {
-			POST: 'Buzz'
-		},	
-		'/sync': {
-			GET: 'RcloneCheck',
-			POST: 'RcloneSync'
-		},
-		'/sync/clearup': {
-			POST: 'DangerZone'
-		},
-		'/ping': {
-			GET: 'Ping'
-		}
+		// '/system/dhcp': {
+		// 	GET: 'GetDhcpcd',
+		// 	POST: 'SetDhcpcd'
+		// },
+		// '/usb': {
+		// 	GET: `files:${config.pdac_usb}`
+		// },
+		// '/info': { 
+		// 	GET: 'Info'
+		// },
+		// '/network': {
+		// 	GET: 'NetworkUSB'
+		// },
+		// '/network/list': {
+		// 	GET: 'NetworkList'
+		// },
+		// '/network/connect': {
+		// 	POST: 'ConnectToNetwork'
+		// },
+		// '/session': {
+		// 	GET: 'SessionsList'
+		// },
+		// '/session/:session': {
+		// 	GET: 'SessionByID'
+		// },
+		// '/session/:session/preview': {
+		// 	GET: 'SessionByID'
+		// },
+		// '/session/:session/complete': {
+		// 	GET: 'SessionByID'
+		// },
+		// '/session/:session/:idx': {
+		// 	GET: 'SessionByID'
+		// },
+		// '/camera/start': {
+		// 	POST: 'CameraStart'
+		// },
+		// '/camera/stop': {
+		// 	POST: 'CameraStop'
+		// },
+		// '/system/reboot': {
+		// 	POST: 'SystemReboot'
+		// },
+		// '/system/shutdown': {
+		// 	POST: 'SystemShutdown'
+		// },
+		// '/system/update': {
+		// 	POST: 'UpdateSystem'
+		// },
+		// '/system/calibrate': {
+		// 	POST: 'CalibrateScreen'
+		// },
+		// '/system/hostname': {
+		// 	GET: 'GetHostname',
+		// 	POST: 'SetHostname'
+		// },
+		// '/system/miband/reconnect': {
+		// 	POST: 'MibandConnect'
+		// },
+		// '/system/miband': {
+		// 	POST: 'SetMibandAddress'
+		// },
+		// '/debug': {
+		// 	POST: 'Debug'
+		// },
+		// '/buzz': {
+		// 	POST: 'Buzz'
+		// },	
+		// '/sync': {
+		// 	GET: 'RcloneCheck',
+		// 	POST: 'RcloneSync'
+		// },
+		// '/sync/clearup': {
+		// 	POST: 'DangerZone'
+		// },
+		// '/ping': {
+		// 	GET: 'Ping'
+		// }
 	})
 	.use(
 		compression({ threshold: 0 }),

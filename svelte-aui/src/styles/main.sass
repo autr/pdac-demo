@@ -10,6 +10,15 @@ $minheight: 80px
 /* labels */
 
 
+@font-face 
+	font-family: Helvetica
+	src: url('/fonts/helvetica-webfont.woff') format('woff'), url('/fonts/helvetica-webfont.ttf') format('ttf'), url('/fonts/helvetica-webfont.eot') format('eot')
+	font-weight: normal
+	font-style: normal
+
+html, body, *
+	font-family: Helvetica, Courier!important
+
 .aui-root
 	// max-height: 100vh
 
@@ -114,9 +123,13 @@ $groups: "default" "column" "row" "matrix"
 	[ref=button]
 		+border-box
 		padding: map-get($internal-sizing, "button")
-	&.active, &:active
+	&:active, &:focus, &.active
 		.aui-actual-button > .aui-actual-button-inner 
-			background: rgba(255,255,255,0.5)
+			background: var(--fg)
+			color: var(--bg)!important
+			* 
+				color: var(--bg)!important
+				fill: var(--bg)
 
 
 .aui-index
