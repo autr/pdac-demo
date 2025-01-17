@@ -8,11 +8,6 @@
 	import { Column, Button, Row } from 'svelte-aui/src/index.js'
 	const dev = process.env.NODE_ENV === 'development';
 
-	export async function preload( page ) {
-		axios.post('/camera/stop?as=json', {});
-		console.log('.....', error, status, message ,response);
-	};
-
 	import { stores } from '@sapper/app'
 	const { page } = stores();
 
