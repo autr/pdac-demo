@@ -209,6 +209,8 @@
 
 </script>
 
+<base href="/pdac-demo/">
+
 <svelte:head>
 	<title>PDAC</title>
 </svelte:head>
