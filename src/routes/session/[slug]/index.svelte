@@ -31,7 +31,6 @@
 	$: totalTime = (() => {
 		let t = 0;
 		session.exercises.forEach( e => {
-			console.log('WOOOOO', e)
 			const ex = e.exercise_id;
 			if (ex.time) t += ex.time;
 		})

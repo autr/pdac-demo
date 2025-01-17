@@ -1,6 +1,5 @@
 <script>
 
-	import axios from 'axios'
 	import { onMount } from 'svelte'
 	import { goto } from '@sapper/app';
 
@@ -120,7 +119,6 @@
 			const sequence = (t == 1) ? '50 50 11 0.001' : '100 100 1 0.001';
 			console.log('Count', sequence, t);
 			console.log('[session:slug:idx] 🖖 intro buzz:', e.detail);
-			// axios.post('/buzz?as=json', { sequence });
 
 		}
 	}
