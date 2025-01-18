@@ -1,5 +1,4 @@
 
-
 <script>
 
 	import sessions from './sessions.json'
@@ -10,7 +9,6 @@
 	export let data;
 		
 	$: dev = process.env.NODE_ENV === 'development';
-
 
 	const directorsLookup = {
 		4: 'MS',
@@ -31,7 +29,7 @@
 
 <Back href="/"/>
 {#each sessions.data as session}
-	{#if session.status}
+	<!-- {#if session.status} -->
 		<a 
 			class="flex align-center row plr06 ptb1 bt2-solid mb0" 
 			style="justify-content: space-between;align-items: center;"
@@ -40,5 +38,5 @@
 			<div>{FormatDate(new Date(session.created_on))}</div>
 			<!-- <div>{directorsLookup[d.modified_by.id]}</div> -->
 		</a>
-	{/if}
+	<!-- {/if} -->
 {/each}

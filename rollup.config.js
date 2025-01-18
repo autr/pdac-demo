@@ -89,20 +89,20 @@ export default {
 		preserveEntrySignatures: 'strict',
 	},
 
-	serviceworker: {
-		input: config.serviceworker.input(),
-		output: config.serviceworker.output(),
-		plugins: [
-			resolve(),
-			replace({
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.PDAC_MODE': JSON.stringify(process.env.PDAC_MODE)
-			}),
-			commonjs(),
-			!dev && terser()
-		],
+	// serviceworker: {
+	// 	input: config.serviceworker.input(),
+	// 	output: config.serviceworker.output(),
+	// 	plugins: [
+	// 		resolve(),
+	// 		replace({
+	// 			'process.browser': true,
+	// 			'process.env.NODE_ENV': JSON.stringify(mode),
+	// 			'process.env.PDAC_MODE': JSON.stringify(process.env.PDAC_MODE)
+	// 		}),
+	// 		commonjs(),
+	// 		!dev && terser()
+	// 	],
 
-		preserveEntrySignatures: false,
-	}
+	// 	preserveEntrySignatures: false,
+	// }
 };
