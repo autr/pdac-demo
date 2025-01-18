@@ -43,17 +43,23 @@
 	}
 	// ---------------------
 
+	let isFullscreen = false
+
 	onMount( async() => {
 
-			console.log('[_layout.svelte] 📦 mounted');
-			page.subscribe(({ path, params, query }) => {
+		console.log('[_layout.svelte] 📦 mounted');
+		page.subscribe(({ path, params, query }) => {
 
-				console.log('[_layout.svelte] 📄 page changed : subscribe', path);
-				info.grab().then( r => {
-					wsPoll()
-					bufferPoll()
-				})
+			console.log('[_layout.svelte] 📄 page changed : subscribe', path);
+			info.grab().then( r => {
+				wsPoll()
+				bufferPoll()
 			})
+		})
+
+		if ($page.query.fullscreen) {
+			isFullscreen = true
+		}
 
 	});
 
@@ -202,15 +208,16 @@
 	import Cogs from "svelte-material-icons/Cogs.svelte";
 
 	import AllColors from './db.colors.js'
+	import ColorLookup from './db.colorLookup.js'
 
-	function onColorChange( e ) {
-		info.setColorIndex( parseInt(e.target.value) + 1 )
+	function GetBackground( color ) {
+		return `background-color: ${ColorLookup[ color.bg ]}`
 	}
 
 </script>
 
 <svelte:head>
-	<title>PDAC</title>
+	<title>PDAC | Regie:KI | Eine Produktion der Digitalen Bürgerbühne</title>
 </svelte:head>
 
 <style lang="sass" global>
@@ -218,40 +225,35 @@
 </style>
 
 <svelte:window  />
-<main> 
-	<div bind:this={PdacEl}  
+<main 
+	style="--fg: { $info.fgColor }; --bg: { $info.bgColor }"> 
+
+	<div 
+		class:--show-mini={!isFullscreen}
+		bind:this={PdacEl}  
 		id="pdac" 
-		class={`aui  ${ (isPi) ? 'hide-cursor' : ''} bg-${ $info.color.bg } relative rel txt-${ $info.color.fg }`} 
-		style="--fg: { $info.fgColor }; --bg: { $info.bgColor }">
-		<header class="header bb2-solid">
-			<select
-				class="absolute t0 l0 fill"
-				style="opacity:0"
-				on:change={onColorChange}>
-				{#each AllColors as color, index}
-					<option
-						value={index}>
-						{color.hostname}
-					</option>
-				{/each}
-			</select>
-			<label>
+		class={`aui  ${ (isPi) ? 'hide-cursor' : ''} bg-${ $info.color.bg } relative rel txt-${ $info.color.fg }`}>
+		<a 
+			href="/"
+			style="cursor:pointer"
+			class="header bb2-solid pointer">
+			<span>
 				<Brain />&nbsp;
 				{$info.mbMemory}mb&nbsp;
 				{$info.temperature}
 				<TemperatureCelsius /> 
-			</label>
-			<label>
+			</span>
+			<span>
 				{$info.colorName}&nbsp;
 
 				<WatchVariant />
 				&nbsp;{$info.mibandNumber}
-			</label>
-			<label>
+			</span>
+			<span>
 				<Wifi /> 
 				&nbsp;192.168.1.{$info.deviceIndex}
-			</label>
-		</header>
+			</span>
+		</a>
 
 		{#if $overlay}
 			<div class="overlay" >
@@ -288,7 +290,7 @@
 							<Button 
 								a={{grow: true}} 
 								style="width:100%" 
-								on:click={ e => overlay.set(null) }>
+								on:click={ e => requestAnimationFrame( () => overlay.set(null) ) }>
 								<a href={action[1]}>
 
 									{#if action[0].toLowerCase() == 'home'}
@@ -324,5 +326,21 @@
 			</Column>
 		</div>
 	</div>
+
+	<!-- <div class="flex flex-row row mtb1" style="flex-wrap:1;">
+		{#each AllColors as color, idx}
+			<div 
+				on:click={() => info.setColorIndex( idx )}
+				style="cursor:pointer;padding:0.2em">
+				<div style="
+					aspect-ratio:1;
+					width:0.6em;
+					border-radius:0.6em;
+					{GetBackground(color)}
+					">
+				</div>
+			</div>
+		{/each}
+	</div> -->
 </main>
 

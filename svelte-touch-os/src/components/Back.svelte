@@ -21,10 +21,10 @@
 
 <!-- {#if !history} -->
 
-<div class="flex row plr06 mb0" style="width:100%;justify-content: space-between;align-items: center;justify-items: center;">
+<div class="flex row mb0" style="width:100%;justify-content: space-between;align-items: center;justify-items: center;">
 	<a 
 		id="back" 
-		class="flex row flex-grow w100pc"
+		class="flex row flex-grow plr06 w100pc"
 		style="flex-grow: 1!important;justify-content: space-between;align-items: center;" 
 		href={href} >
 		<span class="flex row" style="justify-content: flex-start;align-items: center;">

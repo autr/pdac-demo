@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "PDAC_MODE=RECORD PDAC_API=https://api.sinnott.cc/ sapper dev --no-hot",
     "build": "PDAC_MODE=RECORD PDAC_API=https://api.sinnott.cc/ sapper build --legacy",
-    "postbuild": "cp package.json /home/pi/pdac/app && cp -R static /home/pi/pdac/app && cp -R __sapper__ /home/pi/pdac/app",
     "rebuild": "sapper build --legacy && node __sapper__/build",
     "export": "sapper export --legacy && [ -d ./docs ] && rm -rf ./docs; mv ./__sapper__/export ./docs",
     "start": "node __sapper__/build",

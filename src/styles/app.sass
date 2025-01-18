@@ -27,7 +27,26 @@ $smallfontsize: 14px
 #pdac, #pdac .overlay, #pdac .header
 	background-color: map-get($colors, "blue-grey-900")
 
+main
+	position: absolute
+	top: 0
+	left: 0
+	width: 100vw
+	height: 100vh
+	background: var(--bg)
+	display: flex
+	flex-direction: column
+	justify-content: center 
+	align-items: center
 #pdac
+	&.--show-mini
+		max-width: 480px
+		max-height: 480px
+		margin: 0.6em
+		border: 2px solid var(--fg)
+		position: relative
+		> *
+			max-width: 480px
 	*, *::placeholder, *::-webkit-input-placeholder
 		color: var(--fg)
 
@@ -71,6 +90,15 @@ a, button:not( .aui-toggle button )
 			color: var(--bg)!important
 			fill: var(--bg)!important
 
+.header
+	&:active
+		background-color: var(--fg)!important
+		color: var(--bg)!important
+		outline: none
+		*
+			color: var(--bg)!important
+			fill: var(--bg)!important
+
 .no-border > .aui-actual-button
 	border: none!important
 .aui-actual-button, .aui-actual-button-inner
@@ -80,6 +108,8 @@ a, button:not( .aui-toggle button )
 	text-align: center
 	vertical-align: middle
 
+button
+	cursor: pointer!important
 button a, button .centered
 	flex-grow: 1!important
 
@@ -167,7 +197,7 @@ html, *
 		// font-family: pixel, monospace, sans-serif
 		// font-smooth: never!important
 		// -webkit-font-smoothing : none!important
-		label
+		> *
 			display: flex
 			align-items: center
 	.container
@@ -223,7 +253,11 @@ html, *
 	// 		justify-content: left
 	.pdac-main-column a
 			&:focus, &:active
-				background: rgba(255,255,255,0.2)
+				background: var(--fg)
+				color: var(--bg)
+				*
+					color: var(--bg)
+					fill: var(--bg)
 	@each $name, $color in $colors
 		&.txt-#{$name}
 			.timer
@@ -305,7 +339,7 @@ html, *
 	a
 		text-decoration: none
 	.overlay
-		position: fixed
+		position: absolute
 		top: 0
 		left: 0
 		width: 100%

@@ -224,13 +224,36 @@
 		}, 2000)
 	}
 
+	let newTime = 0
+
+	function clickRestart( time ) {
+		console.log('WOOO', time)
+		if (mainTimer) mainTimer.restart( time )
+
+			requestAnimationFrame( () => {
+				document.querySelectorAll('button').forEach( button => {
+					button.classList.remove('active')
+				})
+			})
+	}
+
+	let mainTimer = null
+
 </script>
 
 <Block className="justify-center align-center mt3">
 	{#if recording} 
 		<Timer className="pulse" id="RECORD: {exercise.description}" on:start={onRecordStart} on:second={onRecordSecond} on:end={onRecordEnd} time={exercise.time} />
 	{:else}
-		<Timer className="spin" id="INTRO: {exercise.description}" bind:restart={restartTimer} on:start={onIntroStart} on:second={onIntroSecond} on:end={onIntroEnd} time={session.break_time + 0.999} paused={paused} />
+		<Timer className="spin" 
+		id="INTRO: {exercise.description}" 
+		bind:this={mainTimer}
+		bind:restart={restartTimer} 
+		on:start={onIntroStart} 
+		on:second={onIntroSecond} 
+		on:end={onIntroEnd} 
+		time={ session.break_time + 0.999} 
+		paused={paused} />
 	{/if}
 </Block>
 <Row a={{grow: true}} className="align-center mlr06">
@@ -272,9 +295,15 @@
 		</Button>
 	</Column>
 {:else}
-	<a style="position: absolute; top: 50px; left: 10px;flex-direction: row;align-items: center;" href="/session/{session.url}"><ArrowLeft /> Back</a>
+	<a 
+		class="p1 row"
+		style="justify-content:flex-start;align-items: center;position: absolute; top: 30px; left: 0px;flex-direction: row;align-items: center;" href="/session/{session.url}"><ArrowLeft /> Back</a>
 	<Row a={{grow: true}} className="mlr06 pb06"> 
-		<Button  a={{grow: true}} on:click={ () =>  restartTimer( session.break_time+0.9999 ) } >
+		<Button  
+			id="buttonB"
+			className="override-button"
+			a={{grow: true}} 
+			on:click={ () =>  clickRestart( session.break_time + 0.9999 ) } >
 			<div class="centered">
 				<span><Refresh size="2em" /></span>
 			</div>
@@ -291,15 +320,16 @@
 			</div>
 		</Button>
 		<Button  
-			a={{grow: true}} 
-			on:click={ () =>  restartTimer( 5.99999 ) } >
+			id="buttonB"
+			a={{grow: true}}
+			className="override-button"
+			on:click={ () => clickRestart( 5.99999 ) } >
 			<div class="centered">
 				5s
 			</div>
 		</Button>
 	</Row>
 {/if}
-
 
 <!-- 
 

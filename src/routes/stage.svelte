@@ -108,9 +108,9 @@
 	<Back href="/" className="flex-grow" />
 	<Button 
 		className="h100pc bl2-solid no-border mb0"
-		style="border-radius:0px;border-width: 0px;background:inherit;border-left:2px solid var(--fg)"
+		style="border-radius:0px;border-width: 0px;background:inherit;border-left:2px solid var(--fg);cursor:pointer"
 		on:click={ e => presentation = !presentation }>
-		<div class="centered">
+		<div class="centered" style="cursor:pointer">
 			{#if !presentation}
 				<Eye width="4em" height="1.6em" />
 			{:else}

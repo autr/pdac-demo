@@ -91,7 +91,7 @@
   <span class="ring b" style="{radius}"></span>
   <span class="ring c" style="{radius}"></span>
   <span class="bg" style="{radius}"></span>
-  <span class="txt">{human || '~'}</span>
+  <span class="txt">{Math.round(human) || '~'}</span>
 </div>
 
 <style lang="sass">
