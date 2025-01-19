@@ -68,9 +68,18 @@
 	</div>
 
 	<Button a={{grow: true}} style="border-width:2px;">
-		<a href={'/session/'+session.url+'/1'}>
+		<a href="/session/{session.url}/1">
 			<Check size="1.6em" />
 		</a>
 	</Button>
+
+	<div 
+		style="opacity:0;position:absolute;left:-999999px;top:-999999px">
+
+		{#each session.exercises as exercise, idx}
+			<a href="/session/{session.url}/{idx}">{idx}</a>
+		{/each}
+
+	</div>
 
 </Column>

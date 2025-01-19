@@ -39,14 +39,28 @@ main
 	justify-content: center 
 	align-items: center
 #pdac
+	+shorthand
+	margin: 0 0
+	width: 100vw
+	height: 100vh
+	overflow: auto
+	position: relative
+	box-sizing: border-box
+	display: flex
+	justify-content: stretch
+	align-items: stretch
+	justify-items: stretch
+	flex-direction: column
 	&.--show-mini
 		max-width: 480px
 		max-height: 480px
+		flex-basis: 480px
 		margin: 0.6em
 		border: 2px solid var(--fg)
 		position: relative
 		> *
-			max-width: 480px
+			max-width: 100%
+			width: 100%
 	*, *::placeholder, *::-webkit-input-placeholder
 		color: var(--fg)
 
@@ -168,19 +182,6 @@ html, *
 	+fontsize( $fontsize)
 
 #pdac
-	+shorthand
-	margin: 0 0
-	width: 100vw
-	height: 100vh
-	overflow: auto
-	position: relative
-	box-sizing: border-box
-	// padding-top: $topbar
-	display: flex
-	justify-content: stretch
-	align-items: stretch
-	justify-items: stretch
-	flex-direction: column
 	.header
 		position: sticky
 		width: $width
