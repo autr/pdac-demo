@@ -10,13 +10,13 @@
 	let size = 420
 
 	function onClickBody( b ) {
-		console.log('BODY', b)
+		// console.log('BODY', b)
 		isFace.value = !b
 		if (isBody.value) currentFocus = 'body'
 	}
 
 	function onClickFace( b ) {
-		console.log('FACE', b)
+		// console.log('FACE', b)
 		isBody.value = !b
 		if (isFace.value) currentFocus = 'face'
 	}

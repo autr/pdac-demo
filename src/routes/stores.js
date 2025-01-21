@@ -40,6 +40,17 @@ function createInfoStore() {
 			return { ...u, ...newData }
 		})
 	}
+	const iterateColorIndex = amt => {
+
+		update( u => {
+
+			let index = u.colorIndex + amt
+			if (index >= AllColors.length) index = 0
+			if (index < 0) index = AllColors.length - 1
+			const newData = getInfoByIndex( index )
+			return { ...u, ...newData }
+		})
+	}
 
 	const { subscribe, set, update } = writable( { 
 		...getInfoByIndex( 0 ),
@@ -65,6 +76,7 @@ function createInfoStore() {
 		toggleDrafts,
 		update,
 		setColorIndex,
+		iterateColorIndex,
 		grab: async () => {
 
 			console.log('[stores] ℹ️ getting info... ');

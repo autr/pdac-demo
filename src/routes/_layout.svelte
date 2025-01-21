@@ -61,6 +61,14 @@
 			isFullscreen = true
 		}
 
+		document.addEventListener( 'keydown', e => {
+
+			if (document.activeElement.nodeName != 'INPUT' && document.activeElement.nodeName != 'TEXTAREA') {
+				if (e.code == 'ArrowRight') info.iterateColorIndex( 1 )
+				if (e.code == 'ArrowLeft') info.iterateColorIndex( -1 )
+			}
+		})
+
 	});
 
 
